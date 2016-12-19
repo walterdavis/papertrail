@@ -1,0 +1,17 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @user.name %>
+  <%= image_tag @user.avatar.url(:thumb) %>
+</p>
+<p>
+  <%- @user.versions.each_with_index do |version, idx| -%>
+  <%= link_to_unless_current (idx + 1), user_version_path(@user.id, version: version.id) %>
+  <%- end -%>
+  <%= link_to_unless_current (@user.versions.size + 1), user_path(@user.id) %>
+</p>
+<%= debug @user.versions.pluck(:object) %>
+
+<%= link_to 'Edit', edit_user_path(@user) %> |
+<%= link_to 'Back', users_path %>
